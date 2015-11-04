@@ -1,0 +1,48 @@
+
+body {
+   /* background-color: #333333;
+    background-image: url("images/bg5.jpg"); */
+    background-attachment:fixed;
+	background-size : 100%  auto;
+    background-position: 0 0;
+/*     color: #000000; */
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 80%;
+    height: 100%;
+    line-height: 2;
+    overflow: auto;
+    text-align: center;
+}
+
+html {
+    height: 100%;
+}
+body, dd, dl, dt, form, h1, h2, h3, h4, h5, h6, ul, ol, li, p {
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+.content{
+	position:absolute; /*绝对定位*/
+	padding:30px;
+	top:30%; /*距顶部50%*/
+	left:35%;
+	width:300px; /*宽为400,那么margin-top为-200px*/
+	height:200px; /*高为200那么margin-left为-100px;*/
+	z-index:99; /*浮动在最上层 */ 	
+	border: solid 1px #0076a3;  
+}
+#login{
+	
+}
+.button {  
+    color: #d9eef7;  
+    border: solid 1px #0076a3;  
+    background: #0095cd;  
+    background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));  
+    background: -moz-linear-gradient(top,  #00adee,  #0078a5);  
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');  
+}  
+table tr{
+	line-height : 30px;
+} 

@@ -1,0 +1,46 @@
+html{height:100%}  
+body{height:100%;margin:0px;padding:0px}  
+.head{
+	height : 173px;
+	width : 1202px;
+	background-color:#3B5888;
+ 	margin : 0 auto; 
+}
+ .navi{
+	 float : right; 
+	/* margin-left : 200px; */
+}
+.navi div{
+	display : inline-block;
+	/* border : 1px solid black */
+}
+.head .img{
+	height: 140px;
+	width : 1200;
+	float : left;
+}
+.navi>div>a {
+	text-decoration : none;
+	display : block;
+	width : 80px;
+	padding : 5px;
+	/* background-color : #eee; */
+	text-align : center;
+	color : #ffffff;
+	font-size : 14pt;
+}
+.navi>div>a:hover{
+	background-color : #5C75AA;
+	font-weight : bold;
+	
+}
+.welcomeFlag{
+	position : relative;
+	width : 170px;
+	height:33px;
+	color : #ffffff;
+	float : left;
+	font-size : 13pt;
+	text-align :center;
+ 	line-height:35px; 
+}

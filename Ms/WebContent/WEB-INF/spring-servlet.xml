@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/mvc 
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+	<!-- 相当于注册了DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter两个bean，配置一些messageconverter。即解决了@Controller注解的使用前提配置 -->
+	<mvc:annotation-driven />
+	<!-- 加载包中的controller 注解扫描包 -->
+	<!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+	<context:component-scan base-package="com">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<!-- 将Service注解给去掉 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+
+	<!-- 拦截所有请求判断用户是否登录 -->
+	 <mvc:interceptors>
+		<mvc:interceptor>
+			<!--拦截com文件夹下所有 -->
+			<mvc:mapping path="/**" />
+			<!-- 不需要拦截的请求 -->
+			<mvc:exclude-mapping path="/login/submit.do"/>	<!-- 登录提交不需要拦截 -->
+			<mvc:exclude-mapping path="/login/welcome.do"/>	<!-- 登录不需要拦截 -->
+			<mvc:exclude-mapping path="/images/**"/>	<!-- 放过静态资源 -->
+			<mvc:exclude-mapping path="/js/**"/>
+			<mvc:exclude-mapping path="/css/**"/>
+			<!--指定拦截器类-->
+			<bean class="com.njqs.interceptor.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors> 
+	<!-- 静态资源的访问 -->
+	<mvc:resources location="/images/" mapping="/images/**" />
+	<mvc:resources location="/js/" mapping="/js/**" />
+	<mvc:resources location="/css/" mapping="/css/**" />
+
+	<!-- 视图分解器 -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!--指定视图文件前缀后缀-->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+		<!-- 如果使用jstl的话，配置下面的属性 -->
+		<!-- <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" 
+			/> -->
+	</bean>
+
+	<!-- 上传文件的解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="10485760000" />
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+</beans>

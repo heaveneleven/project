@@ -1,0 +1,36 @@
+/**报表表格样式*/
+.content table {
+            clear: both;
+            border: 1px solid #2E6EBD;
+        }
+.content tr th{
+            font: bold 13px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+			color: #2E6EBD;
+			border-right: 1px solid #7DCDFF;
+			border-bottom: 1px solid #7DCDFF;
+			border-top: 1px solid #7DCDFF;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			text-align: center;
+			padding: 6px 6px 6px 12px;
+			background: #BFE0D7 no-repeat;
+			width:60px;
+        }
+.content td{
+/* 	width : 100px; */
+    background-color:#F9FEFF;
+    color:#3B5688;
+    border-bottom:1px solid #5DC6FF;
+   /** text-shadow:1px 1px 1px #000;*/
+}
+.content td:nth-child(1){
+	font-weight : bold;
+}
+.content tr:nth-child(even)>td{
+	background-color:#E0F0FC; 
+}
+.content td:nth-child(1):hover{ 
+ 	background-color:#7DCDFF; 
+ }
+
+  
