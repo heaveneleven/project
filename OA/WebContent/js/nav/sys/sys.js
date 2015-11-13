@@ -1,0 +1,20 @@
+$(function(){
+	/**系统管理树菜单*/
+	$('#sys_tree').tree({    
+	    url:'nav/tree/sys.do',
+	    lines:true,
+	    onSelect:function(node){
+	    	/**验证当前选项卡是否已存在*/
+	    	if($('#tabs').tabs('exists',node.text)==true){
+	    		$('#tabs').tabs('select',node.text);
+	    	}else{
+	    	$('#tabs').tabs('add',{    
+	    	    title:node.text,  
+	    	    iconCls:node.iconCls,
+	    	    href:'sys/view?id='+node.id,
+	    	    closable:true    
+	    	});  
+	    }
+	    }
+	});  
+});
