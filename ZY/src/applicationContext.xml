@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	<!-- 引入配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 用于激活那些已经在spring容器里注册过的bean -->
+	<!--<context:annotation-config />-->
+	<!-- 除了具有<context:annotation-config>的功能之外，还可以在指定的package下扫描以及注册javabean -->
+     <context:component-scan base-package="com">
+    	<!--将Controller的注解排除掉 ，注意：这里spring扫描的类只有业务层service，DAO层和Entity，不能包括Controller层，不然出错-->  
+   		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />     
+    </context:component-scan>
+	<!--配置数据源-->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<!-- <property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property> -->
+		<!-- <property name="jdbcUrl" value="jdbc:sqlserver://localhost:3306;databaseName=test"></property> 
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"></property> 
+			<property name="url" value="jdbc:mysql://localhost:3306/test"></property> 
+			<property name="username" value="root"></property> <property name="password" 
+			value="123456"></property> -->
+		<!-- <property name="dialect" value="org.hibernate.dialect.SQLServer2008Dialect"/> -->
+		<property name="driverClassName" value="${mysql_driverClassName}" />
+		<property name="url" value="${mysql_url}" />
+		<property name="username" value="${mysql_username}" />
+		<property name="password" value="${mysql_password}" />
+	</bean>
+	<!--配置实体管理器工厂-->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<!--引入上述所配数据源-->
+		<property name="dataSource" ref="dataSource"></property>
+		<!--指定持久化对象配置文件-->
+		<property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml"></property>
+		<property name="persistenceUnitName" value="nuaa"></property>
+		<property name="loadTimeWeaver">
+			<bean
+				class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver">
+			</bean>
+		</property>
+	</bean>
+	<!--加载事务-->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<!--开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!--以下配置借助AOP为所有的service包下的类添加事务，这样就不需要再service类上或者函数上添加@Transaction注解了，但要添加 aspectjweaver-1.x.x.jar(用Maven进行管理时除外)-->
+<!-- 	<aop:config proxy-target-class="true"> -->
+<!-- 		<aop:pointcut id="serviceMethod" expression="execution(* com.njqs.service..*(..))"/> -->
+<!-- 		<aop:advisor pointcut-ref="serviceMethod" advice-ref="txAdvice"/> -->
+<!-- 	</aop:config> -->
+<!-- 	<tx:advice id="txAdvice" transaction-manager="transactionManager"> -->
+<!-- 		<tx:attributes> -->
+<!-- 			<tx:method name="*"/> -->
+<!-- 		</tx:attributes> -->
+<!-- 	</tx:advice> -->
+	
+	<!--spring JDBC -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<!-- 指定数据源 -->
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+</beans>
