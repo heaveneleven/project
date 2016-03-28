@@ -27,12 +27,13 @@
 			<!--拦截com文件夹下所有 -->
 			<mvc:mapping path="/**" />
 			<!-- 不需要拦截的请求 -->
-			<mvc:exclude-mapping path="/main/**"/><!-- 公共访问主页 -->
-			<mvc:exclude-mapping path="/common/**"/><!-- 所要包含的公共部分 -->
+			<mvc:exclude-mapping path="/login/stu/index"/>
+			<mvc:exclude-mapping path="/login/welcome"/><!-- 跳转登录页面 -->
+			<mvc:exclude-mapping path="/login/validate.do"/>	<!-- 登录提交不需要拦截 -->
+ 			<mvc:exclude-mapping path="/register/submit.do"/>	<!--注册提交不需要拦截 -->
 			<mvc:exclude-mapping path="/image/**"/>	<!-- 放过静态资源-->
 			<mvc:exclude-mapping path="/js/**"/>
 			<mvc:exclude-mapping path="/plugin/**"/>
-			<mvc:exclude-mapping path="/css/**"/>
 			<!--指定拦截器类-->
 			<bean class="com.nuaa.interceptor.LoginInterceptor" />
 		</mvc:interceptor>
