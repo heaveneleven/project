@@ -25,7 +25,7 @@ public class LoginDaoImpl extends BaseDaoImpl<UserLogin, Integer> implements Log
 		sql.append("' and l.login_password='");
 		sql.append(login_password);
 		sql.append("'");
-		System.out.println("用户登录验证:"+sql.toString());
+		//System.out.println("用户登录验证:"+sql.toString());
 		UserSessionInfo sessionInfo=new UserSessionInfo();
 		List<Map<String,Object>> list=this.searchForMap(sql.toString());
 		if(list.isEmpty() ||  list==null || list.size()<=0){

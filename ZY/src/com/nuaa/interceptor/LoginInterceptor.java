@@ -28,8 +28,8 @@ public class LoginInterceptor implements HandlerInterceptor{
 			Object handler) throws Exception {
 			String requestUri=request.getRequestURI();
 			String contextPath=request.getContextPath();
-			String url=requestUri.substring(contextPath.length());
-			UserSessionInfo user=(UserSessionInfo)request.getSession().getAttribute(SessionKey.UserInfoKey);
+			//String url=requestUri.substring(contextPath.length());
+			Object user=request.getSession().getAttribute(SessionKey.UserInfoKey);
 			if(user==null || user.toString().isEmpty()){
 //				System.out.println("url:"+url);
 				request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录！");

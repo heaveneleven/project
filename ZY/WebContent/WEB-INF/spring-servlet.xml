@@ -29,7 +29,9 @@
 			<!-- 不需要拦截的请求 -->
 			<mvc:exclude-mapping path="/login/stu/index"/>
 			<mvc:exclude-mapping path="/login/welcome"/><!-- 跳转登录页面 -->
-			<mvc:exclude-mapping path="/login/validate.do"/>	<!-- 登录提交不需要拦截 -->
+			<mvc:exclude-mapping path="/login/stu_login.do"/>	<!-- 登录提交不需要拦截 -->
+ 			<mvc:exclude-mapping path="/login/sir_login.do"/>
+ 			<mvc:exclude-mapping path="/login/admin_login.do"/>
  			<mvc:exclude-mapping path="/register/submit.do"/>	<!--注册提交不需要拦截 -->
 			<mvc:exclude-mapping path="/image/**"/>	<!-- 放过静态资源-->
 			<mvc:exclude-mapping path="/js/**"/>
