@@ -22,29 +22,29 @@ $(function(){
  		     }  
 		});
 	});
-	/**干部登录按钮*/
-	$("#sir_login").click(function(){
+	/**管理员登录按钮*/
+	$("#admin_login").click(function(){
 		$("#login_form").form('submit', {    
-			url:'login/validate.do',   
-		    onSubmit: function(){//发送前操作    
+			url:'login/admin_login.do',   
+		    onSubmit: function(){//发送前操作   
 		    	var isValid = $(this).form('validate');
 				return isValid;	// 返回false终止表单提交
 		    },    
 		    success:function(data) {
 		    	var data = eval('(' + data + ')');  
   		        if(data.success == true){    
- 		   			window.location.href="login/index";
+ 		   			window.location.href="login/admin/index";
  		        }else{    
  		        	$.messager.alert('警告','<strong><center>'+data.msg+'</center></strong>');    
  		        }    
  		     }  
 		}); 
 	});
-	/**管理员登录按钮*/
-	$("#admin_login").click(function(){
+	/**干部登录按钮*/
+	$("#sir_login").click(function(){
 		$("#login_form").form('submit', {    
 			url:'login/validate.do',   
-		    onSubmit: function(){//发送前操作   
+		    onSubmit: function(){//发送前操作    
 		    	var isValid = $(this).form('validate');
 				return isValid;	// 返回false终止表单提交
 		    },    

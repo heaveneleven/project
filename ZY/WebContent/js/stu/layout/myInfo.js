@@ -18,7 +18,7 @@ $('#tt').tree({
     	$('#tabs').tabs('add',{    
     	    title:node.text,  
     	    iconCls:node.iconCls,
-    	    //href:'sys/view?id='+node.id,
+    	    href:'stu/info/person_detail?id='+node.id,
     	    closable:true    
     	});  
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.nuaa.dao.base.impl.BaseDaoImpl;
 import com.nuaa.dao.login.inter.StuLoginDaoInter;
-import com.nuaa.domain.user.StuInfo;
+import com.nuaa.domain.stu.StuInfo;
 import com.nuaa.utils.StuSessionInfo;
 /**学员登录Dao*/
 @Repository("stuLoginDao")

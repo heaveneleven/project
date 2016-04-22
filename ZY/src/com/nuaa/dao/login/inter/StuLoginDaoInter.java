@@ -1,7 +1,7 @@
 package com.nuaa.dao.login.inter;
 
 import com.nuaa.dao.base.inter.BaseDaoInter;
-import com.nuaa.domain.user.StuInfo;
+import com.nuaa.domain.stu.StuInfo;
 import com.nuaa.utils.StuSessionInfo;
 /***
  * 学员登录Dao

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/stu/layout")
 public class LayoutController {
+	
 	/**获取layout中间*/
 	@RequestMapping("/center")
 	public String getCenter(){
